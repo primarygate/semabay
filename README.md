@@ -10,16 +10,22 @@ npm start
 
 Open [http://127.0.0.1:43127/marriage/](http://127.0.0.1:43127/marriage/).
 
-How to try chat:
-1. Open a member → **Chat with …**
-2. Send a message (first message is a chat request)
-3. Refresh the page → open **Chats** — the thread and messages are still there
+How to try it:
+1. Click **Create account** (top right) — choose a login ID + password
+2. Open a member → **Chat with …** → send a message
+3. Refresh → **Chats** — your thread is still there
+4. **Join Today** also requires sign-in
+
+## Login (required for services)
+
+- Users create a **login ID** and **password** to use chat and join.
+- Temporary accounts/sessions live in `data/chats.json` for browser testing.
+- Your team can later replace this with a real database and auth system.
 
 ## Temporary storage (until your team adds a database)
 
 - Chat threads/messages are **not** kept in the browser saver/`localStorage`.
-- For now they go through a small API into `data/chats.json` so you can test the UI in the browser.
-- When the UI is finished, replace that file store with your real database — the client already talks to `/api/chats` and `/api/chats/:memberId`.
+- API: `/api/auth/*` and `/api/chats` — ready to point at a real DB later.
 
 ## Notes
 

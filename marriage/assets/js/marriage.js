@@ -6,8 +6,12 @@
   'use strict';
   var $=function(s,r){return (r||document).querySelector(s)};
   var SECTIONS_STEP=2, DAILY_NEW_CHATS=10;
-  var KEY_UID='semabay_mm_uid_v1';
   var LEGACY_CHATS='semabay_mm_chats_v1', LEGACY_DAY='semabay_mm_newchats_v1';
+  function authed(){return !!(window.SBAuth&&SBAuth.user&&SBAuth.user())}
+  function needLogin(after){
+    if(!window.SBAuth){alert('Sign in is not available yet.');return}
+    SBAuth.require(after);
+  }
   /* Advert images made by SEMA BAY (assets/imgs/marriage). One opens each section of members. */
   var ADS=[["mm-ad-28.webp", 1200, 800, "Wedding procession with family and children"], ["mm-ad-23.webp", 1200, 800, "Wedding arrival with roses"], ["mm-ad-02.webp", 1200, 1200, "Elegant Nikah Ceremony Handshake"], ["mm-ad-24.webp", 1200, 800, "Family welcoming a new baby"], ["mm-ad-13.webp", 1200, 800, "Lavish Somali Nikah Ceremony in Gold and Green"], ["mm-ad-25.webp", 1200, 800, "Parents and child with their newborn"], ["mm-ad-16.webp", 1200, 1200, "Luxurious Gold and White Nikah Ceremony"], ["mm-ad-26.webp", 1200, 800, "Family meeting their newborn"], ["mm-ad-08.webp", 1200, 800, "Joyful Islamic Wedding Celebration"], ["mm-ad-27.webp", 1200, 800, "New parents in the maternity ward"], ["mm-ad-17.webp", 1200, 1200, "Luxurious Islamic Wedding Ceremony"], ["mm-ad-04.webp", 1200, 800, "Elegant Women-Only Wedding Celebration"], ["mm-ad-20.webp", 1200, 1200, "Nikah Ceremony Handshake in Mosque Hall"], ["mm-ad-12.webp", 1200, 800, "Lavish Red and Gold Wedding Celebration"], ["mm-ad-03.webp", 1200, 1200, "Elegant Nikah Ceremony in Ornate Mosque Interior"], ["mm-ad-22.webp", 1200, 800, "Vibrant Somali Wedding Banquet Celebration"], ["mm-ad-18.webp", 1200, 1200, "Luxurious Muslim Wedding Ceremony"], ["mm-ad-07.webp", 1200, 800, "Joyful Gold-and-White Wedding Celebration"], ["mm-ad-01.webp", 1200, 800, "Elegant Henna Celebration in a Grand Ballroom"], ["mm-ad-10.webp", 1200, 800, "Lavish Purple and Gold Women’s Celebration"], ["mm-ad-14.webp", 1200, 800, "Lavish Wedding Cake Celebration"], ["mm-ad-06.webp", 1200, 800, "Grand Golden Wedding Feast Hall"], ["mm-ad-15.webp", 1200, 800, "Lavish Wedding Dessert Banquet"], ["mm-ad-05.webp", 1200, 800, "Gathered in Prayer Among Roses"], ["mm-ad-09.webp", 1200, 800, "Lavish Purple and Gold Quran Circle"], ["mm-ad-11.webp", 1200, 800, "Lavish Quran Recitation Gathering"], ["mm-ad-19.webp", 1200, 800, "Luxurious Quran Recitation Circle"], ["mm-ad-21.webp", 1200, 800, "Ornate Islamic Prayer Gathering"]];
 
@@ -197,7 +201,11 @@
   });
 
   $('#mmReport').addEventListener('click',function(e){e.stopPropagation();$('#mmReport').hidden=true;$('#mmReportDone').hidden=false});
-  $('#mmChatBtn').addEventListener('click',function(e){e.stopPropagation();var p=cur;hideDlg();openChat(p)});
+  $('#mmChatBtn').addEventListener('click',function(e){
+    e.stopPropagation();
+    var p=cur;
+    needLogin(function(){hideDlg();openChat(p)});
+  });
 
   /* ---------- join form ---------- */
   /* countries members most often come from, with phone codes and a few city suggestions (people can type any city) */
@@ -260,7 +268,11 @@
     sl._clear=clear;
   });
   function photoCount(){return [].filter.call(jform.querySelectorAll('.jf-slot input'),function(i){return i.files&&i.files.length}).length}
-  function openJoin(from){jform.hidden=false;jdone.hidden=true;jerr.hidden=true;showDlg($('#mmJoin'),from);$('#mmJoin .jf-scroll').scrollTop=0}
+  function openJoin(from){
+    needLogin(function(){
+      jform.hidden=false;jdone.hidden=true;jerr.hidden=true;showDlg($('#mmJoin'),from);$('#mmJoin .jf-scroll').scrollTop=0;
+    });
+  }
   jform.message.addEventListener('input',function(){$('#mmMsgCount').textContent=jform.message.value.length});
   jform.addEventListener('submit',function(e){
     e.preventDefault();var f=jform, err='', field=null, age=+f.age.value, n=photoCount();
@@ -313,17 +325,11 @@
   var QUICK=['Assalamu alaikum 😊','Tell me a little about yourself.','What are you looking for in a spouse?','Where does your family live?','Would you like to involve our families?','JazakAllahu khairan for your reply.'];
   var EMOJI=['😊','😄','🙂','😍','🥰','😇','🤲','🙏','👍','👏','🌸','🌹','💐','✨','🌙','⭐','☕','🍰','🎉','💖','❤️','💕','😂','😉','🤗','😌','🙌','👋','✅','📍'];
   var store={threads:{},newChats:{}};
-  function uid(){
-    var id='';try{id=localStorage.getItem(KEY_UID)||''}catch(e){}
-    if(!/^[a-zA-Z0-9_-]{8,64}$/.test(id)){
-      id='u_'+Math.random().toString(36).slice(2)+Date.now().toString(36);
-      try{localStorage.setItem(KEY_UID,id)}catch(e){}
-    }
-    return id;
-  }
   function api(path,opts){
+    if(window.SBAuth&&SBAuth.api)return SBAuth.api(path,opts);
     opts=opts||{};
-    opts.headers=Object.assign({'Content-Type':'application/json','X-MM-User':uid()},opts.headers||{});
+    opts.headers=Object.assign({'Content-Type':'application/json'},opts.headers||{});
+    opts.credentials='same-origin';
     return fetch('/api'+path,opts).then(function(r){
       return r.json().then(function(j){if(!r.ok)throw new Error((j&&j.error)||('HTTP '+r.status));return j});
     });
@@ -368,6 +374,9 @@
     if(day&&day.day&&day.n){store.newChats[day.day]=Math.max(store.newChats[day.day]||0,day.n)}
   }
   function hydrateChats(){
+    if(!authed()){
+      store.threads={};store.newChats={};chatReady=false;drawList();return Promise.resolve();
+    }
     return api('/chats').then(function(data){
       store.threads=data.threads||{};
       store.newChats=data.newChats||{};
@@ -377,6 +386,7 @@
       if(who)draw();
     }).catch(function(err){
       console.warn('Chat load failed',err);
+      if(String(err.message||'').indexOf('Sign in')>=0){store.threads={};store.newChats={};chatReady=false;drawList();return}
       clearLegacyBrowserChats();
       chatReady=true;
       drawList();
@@ -470,6 +480,7 @@
     if(!input.disabled&&window.innerWidth>640)input.focus();
   }
   function openChat(p){
+    if(!authed()){needLogin(function(){hydrateChats().then(function(){openChat(p)})});return}
     chat.hidden=false;chat.classList.remove('is-min');$('#mmcMin').setAttribute('aria-expanded','true');
     document.documentElement.classList.toggle('mc-lock',window.innerWidth<=640);
     if(p)select(p);else{chat.classList.remove('show-conv');draw();drawList()}
@@ -533,13 +544,21 @@
   $('.mc-head').addEventListener('click',function(e){if(chat.classList.contains('is-min')&&!e.target.closest('button')){$('#mmcMin').click()}});
   $('#mcBack').addEventListener('click',function(){chat.classList.remove('show-conv');closePops();drawList();var a=listEl.querySelector('.is-active');if(a)a.focus()});
   launch.addEventListener('click',function(){
+    if(!authed()){needLogin(function(){hydrateChats().then(function(){launch.click()})});return}
     if(who){openChat(who);return}
     var a=all(), ids=Object.keys(a).filter(function(id){return byId(id)&&(a[id].msgs||[]).length}).sort(function(x,y){return lastAt(a[y])-lastAt(a[x])});
     openChat(ids.length?byId(ids[0]):null);
   });
   var navChats=document.getElementById('sbNavChats');
   if(navChats)navChats.addEventListener('click',function(e){e.preventDefault();openChat(who)});
-  hydrateChats();
+  if(window.SBAuth&&SBAuth.onChange){
+    SBAuth.onChange(function(u){
+      if(u)hydrateChats();
+      else{store.threads={};store.newChats={};who=null;chatReady=false;closeChat();drawList()}
+    });
+  }
+  if(window.SBAuth&&SBAuth.refresh)SBAuth.refresh().then(function(){hydrateChats()});
+  else hydrateChats();
 
   fillCountries();render();
 })();
