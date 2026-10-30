@@ -1,7 +1,6 @@
-/* SEMA BAY — Muslim Marriage page.
-   Sample members: photos supplied by SEMA BAY for the preview (assets/imgs/marriage/members), not real members.
-   Chat threads/messages use /api (temporary file store) so the UI can be tested in the browser; swap in a real DB later.
-   Join applications still wait for the member system. */
+/* SEMA BAY — Muslim Marriage page (plain HTML/JS, no npm).
+   Sample members: photos for preview only, not real members.
+   Login + chat use the in-browser store (sb-store.js) until your team adds a real database. */
 (function(){
   'use strict';
   var $=function(s,r){return (r||document).querySelector(s)};
@@ -352,7 +351,7 @@
         t.msgs=t.msgs||[];
         var last=t.msgs[t.msgs.length-1];
         if(!last||!last.sys||last.kind!=='bad'){
-          t.msgs.push({sys:1,kind:'bad',t:'Could not save this chat on the server. Check your connection and try again.',at:Date.now()});
+          t.msgs.push({sys:1,kind:'bad',t:'Could not save this chat. Try again.',at:Date.now()});
           store.threads[id]=t;draw();drawList();
         }
       }

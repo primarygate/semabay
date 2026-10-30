@@ -1,4 +1,4 @@
-/* Minimal SEMA BAY chrome so the marriage section can run without the full site. */
+/* Minimal SEMA BAY chrome — plain HTML, no npm. */
 (function () {
   'use strict';
   var head = document.getElementById('sbSiteHead');
@@ -6,15 +6,15 @@
   if (head) {
     head.innerHTML =
       '<header class="sb-head">' +
-      '<a class="sb-brand" href="/marriage/">SEMA BAY</a>' +
+      '<a class="sb-brand" href="./">SEMA BAY</a>' +
       '<nav class="sb-nav" aria-label="Site">' +
-      '<a href="/marriage/">Marriage</a>' +
-      '<a href="/marriage/#chats" id="sbNavChats">Chats</a>' +
+      '<a href="./">Marriage</a>' +
+      '<a href="#chats" id="sbNavChats">Chats</a>' +
       '<span class="sb-auth-slot" id="sbAuthSlot"></span>' +
       '</nav></header>';
   }
   if (foot) {
     foot.innerHTML =
-      '<footer class="sb-foot"><p>SEMA BAY · Muslim Marriage · Sign in with your login ID to use chat and join</p></footer>';
+      '<footer class="sb-foot"><p>SEMA BAY · Muslim Marriage · Open this HTML in your browser — no npm needed</p></footer>';
   }
 })();

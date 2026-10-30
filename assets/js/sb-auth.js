@@ -1,39 +1,15 @@
-/* SEMA BAY — login ID + password for browser testing (temporary store until real DB). */
+/* SEMA BAY — login ID + password (HTML-only; uses SBStore, no npm). */
 (function (global) {
   'use strict';
-  var KEY_TOKEN = 'semabay_mm_session_v1';
   var user = null;
   var pending = null;
   var listeners = [];
 
-  function token() {
-    try {
-      return localStorage.getItem(KEY_TOKEN) || '';
-    } catch (e) {
-      return '';
-    }
-  }
-
-  function setToken(t) {
-    try {
-      if (t) localStorage.setItem(KEY_TOKEN, t);
-      else localStorage.removeItem(KEY_TOKEN);
-    } catch (e) {}
-  }
-
   function api(path, opts) {
-    opts = opts || {};
-    var headers = Object.assign({ 'Content-Type': 'application/json' }, opts.headers || {});
-    var t = token();
-    if (t) headers['X-MM-Session'] = t;
-    opts.credentials = 'same-origin';
-    opts.headers = headers;
-    return fetch('/api' + path, opts).then(function (r) {
-      return r.json().then(function (j) {
-        if (!r.ok) throw new Error((j && j.error) || 'HTTP ' + r.status);
-        return j;
-      });
-    });
+    if (!global.SBStore) {
+      return Promise.reject(new Error('Storage is not available.'));
+    }
+    return global.SBStore.api(path, opts);
   }
 
   function notify() {
@@ -43,6 +19,12 @@
       } catch (e) {}
     });
     paintHeader();
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
   }
 
   function paintHeader() {
@@ -65,12 +47,6 @@
       if (si) si.onclick = function () { openAuth('login'); };
       if (cr) cr.onclick = function () { openAuth('register'); };
     }
-  }
-
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"]/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
-    });
   }
 
   function ensureModal() {
@@ -135,8 +111,7 @@
     ensureModal();
     pending = typeof after === 'function' ? after : null;
     setMode(nextMode || 'login');
-    var modal = document.getElementById('sbAuthModal');
-    modal.hidden = false;
+    document.getElementById('sbAuthModal').hidden = false;
     document.documentElement.style.overflow = 'hidden';
     setTimeout(function () {
       document.getElementById('sbAuthId').focus();
@@ -161,7 +136,6 @@
     var path = mode === 'register' ? '/auth/register' : '/auth/login';
     api(path, { method: 'POST', body: JSON.stringify({ loginId: id, password: pass }) })
       .then(function (data) {
-        if (data.token) setToken(data.token);
         user = data.user;
         notify();
         var done = pending;
@@ -181,7 +155,6 @@
     return api('/auth/logout', { method: 'POST', body: '{}' })
       .catch(function () {})
       .then(function () {
-        setToken('');
         user = null;
         notify();
       });
@@ -191,7 +164,6 @@
     return api('/auth/me')
       .then(function (data) {
         user = data.user || null;
-        if (!user) setToken('');
         notify();
         return user;
       })
@@ -215,10 +187,6 @@
     });
   }
 
-  function onChange(fn) {
-    listeners.push(fn);
-  }
-
   global.SBAuth = {
     api: api,
     refresh: refresh,
@@ -228,13 +196,20 @@
     user: function () {
       return user;
     },
-    onChange: onChange,
-    token: token,
+    onChange: function (fn) {
+      listeners.push(fn);
+    },
   };
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function boot() {
     ensureModal();
     paintHeader();
     refresh();
-  });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
 })(window);
