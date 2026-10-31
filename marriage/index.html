@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="assets/js/sb-clean.js?v=1438"></script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#0B1F4D"/>
+<title>Muslim Marriage · SEMA BAY</title>
+<link rel="icon" href="assets/imgs/theme/favicon.svg?v=1438" type="image/svg+xml"/><link rel="icon" type="image/png" sizes="32x32" href="assets/imgs/theme/favicon-32.png?v=1438"/>
+<link href="https://fonts.bunny.net/css?family=lato:400,700,900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/css/sb-site.css?v=1438"/>
+<link rel="stylesheet" href="assets/css/marriage.css?v=1438"/>
+<link rel="stylesheet" href="assets/css/mm-site.css?v=1438"/>
+<link rel="stylesheet" href="assets/css/sb-phone.css?v=1438"/>
+<script src="assets/js/sb-dialog.js?v=1438"></script>
+<link rel="stylesheet" href="assets/css/sb-text.css?v=1438">
+</head>
+<body class="mm-page">
+
+<div id="sbSiteHead" data-placeholder="Search products, sellers or services…"></div>
+
+<main class="mm" id="sbMain">
+
+  <section class="mm-bar" aria-labelledby="mmBarTitle">
+    <h1 class="mm-bar-title" id="mmBarTitle">Find Your Spouse</h1>
+    <label class="mm-field mm-field-look">
+      <svg class="mm-fi" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><defs><linearGradient id="mmHeart" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF3B3B"/><stop offset="1" stop-color="#D90F1F"/></linearGradient></defs><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.6 1.1 5.3 3 1.7-1.9 3.2-3 5.3-3 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z" fill="url(#mmHeart)"/></svg>
+      <span class="mm-flabel">Marital status</span>
+      <select id="mmLook">
+        <option value="">Any</option>
+        <option value="Never married">Never married</option>
+        <option value="Divorced">Divorced</option>
+        <option value="Widowed">Widowed</option>
+      </select>
+    </label>
+    <div class="mm-who" role="group" aria-label="Show">
+      <button type="button" class="mm-who-btn mm-who-w" data-gender="f" aria-pressed="true">
+        <svg viewBox="3 2.6 18 18.8" width="26" height="26" aria-hidden="true"><circle cx="12" cy="7.5" r="4.3" fill="#D946EF"/><path d="M3.5 21c.6-4.6 4-7.4 8.5-7.4s7.9 2.8 8.5 7.4z" fill="#C026D3"/></svg>
+        Women</button>
+      <button type="button" class="mm-who-btn mm-who-m" data-gender="m" aria-pressed="false">
+        <svg viewBox="3 2.6 18 18.8" width="26" height="26" aria-hidden="true"><circle cx="12" cy="7.5" r="4.3" fill="#38BDF8"/><path d="M3.5 21c.6-4.6 4-7.4 8.5-7.4s7.9 2.8 8.5 7.4z" fill="#0EA5E9"/></svg>
+        Men</button>
+    </div>
+    <label class="mm-field mm-field-country">
+      <span class="mm-globe" aria-hidden="true">🌍</span>
+      <span class="mm-flabel">Country</span>
+      <select id="mmCountry"><option value="">All countries</option></select>
+    </label>
+    <button type="button" class="mm-join-now" data-mm-join aria-label="Join Muslim Marriage today">
+      <svg viewBox="2 4 20 16.4" width="26" height="26" aria-hidden="true"><circle cx="9" cy="8" r="3.6" fill="#FFE2C7"/><path d="M2.5 20c.5-3.9 3.1-6.2 6.5-6.2s6 2.3 6.5 6.2z" fill="#FFE2C7"/><circle cx="16.5" cy="8.6" r="3" fill="#fff"/><path d="M13.6 13.9c.9-.4 1.9-.6 2.9-.6 2.9 0 5 2 5.4 5.6h-6.3c-.3-2-1-3.7-2-5z" fill="#fff"/></svg>
+      <span class="mm-join-txt">Join Today</span>
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </section>
+
+  
+<div class="mm-grid" id="mmGrid" aria-label="Members"></div>
+  <p class="mm-empty" id="mmEmpty" hidden>No members match these choices. Choose “All countries” or marital status “Any” to see everyone.</p>
+  <div class="mm-more-wrap"><button type="button" class="mm-more" id="mmMore" hidden>Show more members</button></div>
+
+  <p class="mm-rules">Photos must be modest: no nudity and no revealing clothes. Report any profile that breaks this rule and the SEMA BAY team will remove it.</p>
+</main>
+
+<!-- Photo viewer -->
+<div class="mm-viewer" id="mmViewer" role="dialog" aria-modal="true" aria-labelledby="mmvName" hidden>
+  <div class="mm-viewer-box">
+    <button type="button" class="mm-x" data-mm-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="mm-stage" id="mmStage" title="Click to zoom">
+      <img id="mmBig" alt="" draggable="false"/>
+      <button type="button" class="mm-nav mm-prev" data-mm-step="-1" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="mm-nav mm-next" data-mm-step="1" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p class="mm-zoom-hint" id="mmZoomHint">Click the photo to zoom</p>
+    </div>
+    <div class="mm-side">
+      <h2 id="mmvName"></h2>
+      <p class="mm-where" id="mmvWhere"></p>
+      <p class="mm-v-meta"><span class="mm-dot-line" id="mmvSeen"></span><span class="mm-chip" id="mmvMarital"></span></p>
+      <figure class="mm-letter">
+        <figcaption id="mmvLetterTitle"></figcaption>
+        <blockquote id="mmvLetter"></blockquote>
+      </figure>
+      <div class="mm-thumbs" id="mmThumbs" role="group" aria-label="Photos"></div>
+      <button type="button" class="mm-chat-btn" id="mmChatBtn"></button>
+      <button type="button" class="mm-report" id="mmReport">Report this profile</button>
+      <p class="mm-report-done" id="mmReportDone" role="status" hidden>Thank you. The SEMA BAY team will review this profile.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Join form -->
+<div class="mm-viewer mm-join" id="mmJoin" role="dialog" aria-modal="true" aria-labelledby="mmJoinTitle" hidden>
+  <div class="mm-join-box jf">
+    <button type="button" class="mm-x jf-x" data-mm-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+    </button>
+    <div class="jf-scroll">
+    <div class="jf-hero"><img src="assets/imgs/marriage/mm-join-header.webp?v=1435" alt="" width="1024" height="372"/></div>
+    <form id="mmJoinForm" class="jf-body" novalidate>
+      <h2 id="mmJoinTitle" class="visually-hidden">Join Muslim Marriage</h2>
+      <div class="jf-grid">
+        <div class="jf-f">
+          <label class="jf-l" for="jfName"><span class="jf-ic" style="--c:#1E6FF2" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="8" r="4" fill="#fff"/><path d="M4 20c.6-4.2 3.9-6.6 8-6.6s7.4 2.4 8 6.6z" fill="#fff"/></svg></span>Full Name</label>
+          <input id="jfName" name="name" autocomplete="name" maxlength="60" placeholder="Enter your full name" required/>
+          <small class="jf-hint">Only your first name is shown on your profile.</small>
+        </div>
+        <fieldset class="jf-f jf-gender">
+          <legend class="jf-l"><span class="jf-ic" style="--c:#E5197F" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="9" cy="8.5" r="3.3" fill="#fff"/><path d="M2.8 19.5c.5-3.6 2.9-5.6 6.2-5.6s5.7 2 6.2 5.6z" fill="#fff"/><circle cx="16.5" cy="9" r="2.7" fill="#fff"/><path d="M14.4 14.2c.7-.3 1.4-.4 2.1-.4 2.6 0 4.4 1.8 4.8 5h-5c-.2-1.8-.8-3.4-1.9-4.6z" fill="#fff"/></svg></span>I am a</legend>
+          <div class="jf-gender-row">
+            <label class="jf-g jf-g-w"><input type="radio" name="gender" value="f" required/><span><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><circle cx="12" cy="7" r="4.2" fill="currentColor"/><path d="M7.3 5.8C8 3 9.8 2 12 2s4 1 4.7 3.8c-1.2-1-2.8-1.5-4.7-1.5s-3.5.5-4.7 1.5z" fill="currentColor"/><path d="M4.5 21.5c.4-4.6 3.4-7.6 7.5-7.6s7.1 3 7.5 7.6z" fill="currentColor"/></svg>Woman</span></label>
+            <label class="jf-g jf-g-m"><input type="radio" name="gender" value="m"/><span><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><circle cx="12" cy="7" r="4.4" fill="currentColor"/><path d="M4.5 21.5c.4-4.6 3.4-7.6 7.5-7.6s7.1 3 7.5 7.6z" fill="currentColor"/></svg>Man</span></label>
+          </div>
+        </fieldset>
+        <div class="jf-f">
+          <label class="jf-l" for="jfCountry"><span class="jf-ic" style="--c:#16A34A" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="8" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M4 12h16M12 4c2.4 2.3 3.6 5 3.6 8s-1.2 5.7-3.6 8c-2.4-2.3-3.6-5-3.6-8S9.6 6.3 12 4z" fill="none" stroke="#fff" stroke-width="1.6"/></svg></span>Country</label>
+          <select id="jfCountry" name="country" required><option value="">Select your country</option></select>
+        </div>
+        <div class="jf-f">
+          <label class="jf-l" for="jfCity"><span class="jf-ic" style="--c:#F59E0B" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 21s6.5-5.8 6.5-11.2a6.5 6.5 0 10-13 0C5.5 15.2 12 21 12 21z" fill="#fff"/><circle cx="12" cy="9.8" r="2.4" fill="#F59E0B"/></svg></span>City</label>
+          <input id="jfCity" name="city" list="jfCities" autocomplete="address-level2" maxlength="40" placeholder="Type your city" required/>
+          <datalist id="jfCities"></datalist>
+        </div>
+        <div class="jf-f">
+          <label class="jf-l" for="jfAge"><span class="jf-ic" style="--c:#8B2BE2" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="4" y="5.5" width="16" height="14" rx="2.5" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><rect x="7.5" y="12.5" width="3" height="2.6" rx=".6" fill="#fff"/><rect x="13" y="12.5" width="3" height="2.6" rx=".6" fill="#fff"/></svg></span>Age</label>
+          <input id="jfAge" name="age" type="number" inputmode="numeric" min="18" max="99" placeholder="Enter your age" required/>
+        </div>
+        <div class="jf-f">
+          <label class="jf-l" for="jfMarital"><span class="jf-ic" style="--c:#E11D2E" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="14.5" r="5.5" fill="none" stroke="#fff" stroke-width="2"/><path d="M9.5 5.5l2.5-2.5 2.5 2.5-2.5 3z" fill="#fff"/></svg></span>Marital status</label>
+          <select id="jfMarital" name="marital" required><option value="">Choose your marital status</option><option>Never married</option><option>Divorced</option><option>Widowed</option></select>
+        </div>
+        <div class="jf-f jf-wide">
+          <label class="jf-l" for="jfPhone"><span class="jf-ic" style="--c:#16A34A" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M6.6 3.8l2.6-.5 1.8 4.1-1.9 1.4a11 11 0 005 5l1.4-1.9 4.1 1.8-.5 2.6c-.2.9-1 1.6-2 1.6C10.5 17.9 5.1 12.5 5 5.8c0-1 .7-1.8 1.6-2z" fill="#fff"/></svg></span>Phone number</label>
+          <div class="jf-phone">
+            <select id="jfCode" name="code" aria-label="Country code" required><option value="">Code</option></select>
+            <input id="jfPhone" name="phone" type="tel" autocomplete="tel-national" placeholder="Enter your phone number" required/>
+          </div>
+          <small class="jf-hint">Private. Used only to confirm your account; it is never shown on your profile.</small>
+        </div>
+        <div class="jf-f jf-wide">
+          <span class="jf-l" id="jfPhotosL"><span class="jf-ic" style="--c:#F97316" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 8.5c0-1 .8-1.8 1.8-1.8h2l1.3-2h5.8l1.3 2h2c1 0 1.8.8 1.8 1.8v8.7c0 1-.8 1.8-1.8 1.8H5.8c-1 0-1.8-.8-1.8-1.8z" fill="#fff"/><circle cx="12" cy="12.8" r="3.2" fill="#F97316"/></svg></span>Photos (1 to 5)</span>
+          <div class="jf-slots" role="group" aria-labelledby="jfPhotosL"><div class="jf-slot is-main" data-slot="0"><label class="jf-slot-pick"><svg class="jf-cam" viewBox="0 0 48 40" width="54" height="45" aria-hidden="true"><path d="M4 12.5C4 10 6 8 8.5 8h5l3-4.5h15L34.5 8h5c2.5 0 4.5 2 4.5 4.5V31c0 2.5-2 4.5-4.5 4.5h-31C6 35.5 4 33.5 4 31z" fill="#1E6FF2"/><circle cx="24" cy="21" r="7.5" fill="#fff"/><circle cx="24" cy="21" r="4.4" fill="#1E6FF2"/><circle cx="39" cy="31" r="8" fill="#F5A623" stroke="#fff" stroke-width="2"/><path d="M39 27v8M35 31h8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>Upload Photo 1<small>(Main photo)</small></span><input type="file" accept="image/*" name="photo1" class="visually-hidden"/></label><img class="jf-slot-img" alt="" hidden/><button type="button" class="jf-slot-x" aria-label="Remove photo 1" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></div><div class="jf-slot" data-slot="1"><label class="jf-slot-pick"><svg class="jf-cam" viewBox="0 0 48 40" width="54" height="45" aria-hidden="true"><path d="M4 12.5C4 10 6 8 8.5 8h5l3-4.5h15L34.5 8h5c2.5 0 4.5 2 4.5 4.5V31c0 2.5-2 4.5-4.5 4.5h-31C6 35.5 4 33.5 4 31z" fill="#16A34A"/><circle cx="24" cy="21" r="7.5" fill="#fff"/><circle cx="24" cy="21" r="4.4" fill="#16A34A"/><circle cx="39" cy="31" r="8" fill="#F5A623" stroke="#fff" stroke-width="2"/><path d="M39 27v8M35 31h8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>Upload Photo 2</span><input type="file" accept="image/*" name="photo2" class="visually-hidden"/></label><img class="jf-slot-img" alt="" hidden/><button type="button" class="jf-slot-x" aria-label="Remove photo 2" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></div><div class="jf-slot" data-slot="2"><label class="jf-slot-pick"><svg class="jf-cam" viewBox="0 0 48 40" width="54" height="45" aria-hidden="true"><path d="M4 12.5C4 10 6 8 8.5 8h5l3-4.5h15L34.5 8h5c2.5 0 4.5 2 4.5 4.5V31c0 2.5-2 4.5-4.5 4.5h-31C6 35.5 4 33.5 4 31z" fill="#8B2BE2"/><circle cx="24" cy="21" r="7.5" fill="#fff"/><circle cx="24" cy="21" r="4.4" fill="#8B2BE2"/><circle cx="39" cy="31" r="8" fill="#F5A623" stroke="#fff" stroke-width="2"/><path d="M39 27v8M35 31h8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>Upload Photo 3</span><input type="file" accept="image/*" name="photo3" class="visually-hidden"/></label><img class="jf-slot-img" alt="" hidden/><button type="button" class="jf-slot-x" aria-label="Remove photo 3" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></div><div class="jf-slot" data-slot="3"><label class="jf-slot-pick"><svg class="jf-cam" viewBox="0 0 48 40" width="54" height="45" aria-hidden="true"><path d="M4 12.5C4 10 6 8 8.5 8h5l3-4.5h15L34.5 8h5c2.5 0 4.5 2 4.5 4.5V31c0 2.5-2 4.5-4.5 4.5h-31C6 35.5 4 33.5 4 31z" fill="#F97316"/><circle cx="24" cy="21" r="7.5" fill="#fff"/><circle cx="24" cy="21" r="4.4" fill="#F97316"/><circle cx="39" cy="31" r="8" fill="#F5A623" stroke="#fff" stroke-width="2"/><path d="M39 27v8M35 31h8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>Upload Photo 4</span><input type="file" accept="image/*" name="photo4" class="visually-hidden"/></label><img class="jf-slot-img" alt="" hidden/><button type="button" class="jf-slot-x" aria-label="Remove photo 4" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></div><div class="jf-slot" data-slot="4"><label class="jf-slot-pick"><svg class="jf-cam" viewBox="0 0 48 40" width="54" height="45" aria-hidden="true"><path d="M4 12.5C4 10 6 8 8.5 8h5l3-4.5h15L34.5 8h5c2.5 0 4.5 2 4.5 4.5V31c0 2.5-2 4.5-4.5 4.5h-31C6 35.5 4 33.5 4 31z" fill="#E5197F"/><circle cx="24" cy="21" r="7.5" fill="#fff"/><circle cx="24" cy="21" r="4.4" fill="#E5197F"/><circle cx="39" cy="31" r="8" fill="#F5A623" stroke="#fff" stroke-width="2"/><path d="M39 27v8M35 31h8" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg><span>Upload Photo 5</span><input type="file" accept="image/*" name="photo5" class="visually-hidden"/></label><img class="jf-slot-img" alt="" hidden/><button type="button" class="jf-slot-x" aria-label="Remove photo 5" hidden><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button></div></div>
+          <small class="jf-hint">Modest photos of you only. Photo 1 is the one people see first.</small>
+        </div>
+        <div class="jf-f jf-wide">
+          <label class="jf-l" for="jfMsg"><span class="jf-ic" style="--c:#1E6FF2" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 4C7 4 3.5 7.2 3.5 11.2c0 2 .9 3.8 2.4 5.1L5 20l4.1-1.8c.9.3 1.9.4 2.9.4 5 0 8.5-3.2 8.5-7.2S17 4 12 4z" fill="#fff"/></svg></span>Your message</label>
+          <textarea id="jfMsg" name="message" rows="4" maxlength="400" placeholder="Introduce yourself and say what you are looking for in a spouse." required></textarea>
+          <small class="jf-count"><span id="mmMsgCount">0</span> / 400</small>
+        </div>
+        <label class="jf-check jf-wide"><input type="checkbox" name="agree" required/><span class="jf-box" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>I am 18 or older, and my photos are modest and of me.</label>
+      </div>
+      <p class="mm-form-error" id="mmFormError" role="alert" hidden></p>
+      <button type="submit" class="jf-send">
+        <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M21.5 2.8L2.8 10.4c-.9.4-.8 1.6.1 1.9l6.2 1.9 1.9 6.2c.3.9 1.5 1 1.9.1L21.5 2.8z" fill="#F5B400"/><path d="M9.1 14.2l12.4-11.4-8.9 13.7z" fill="#C98B00"/></svg>
+        <span>Send for approval</span>
+        <svg class="jf-chev" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+    <div class="mm-join-done jf-done" id="mmJoinDone" hidden>
+      <h2>Sent for approval</h2>
+      <p id="mmJoinDoneText"></p>
+      <button type="button" class="jf-send jf-send-sm" data-mm-close><span>Back to members</span></button>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- Chat window -->
+<section class="mc" id="mmChat" aria-label="Chats" hidden>
+  <aside class="mc-side" aria-label="Your chats">
+    <div class="mc-side-top">
+      <div class="mc-search-row">
+        <label class="mc-search"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          <span class="visually-hidden">Search chats</span><input type="search" id="mcSearch" placeholder="Search chats…" autocomplete="off"/></label>
+        <button type="button" class="mc-icon-btn mc-compose" id="mcCompose" aria-label="Start a new chat" title="Start a new chat">
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M13.5 6.5l4 4" stroke="currentColor" stroke-width="2"/><path d="M12 4H6a2 2 0 00-2 2v6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".6"/></svg>
+        </button>
+      </div>
+      <div class="mc-tabs" role="tablist" aria-label="Show">
+        <button type="button" role="tab" class="mc-tab" data-tab="all" aria-selected="true">All Chats <b class="mc-tab-n" id="mcUnreadAll" hidden></b></button>
+        <button type="button" role="tab" class="mc-tab" data-tab="online" aria-selected="false"><i class="mc-dot-on" aria-hidden="true"></i>Online</button>
+        <button type="button" role="tab" class="mc-tab" data-tab="fav" aria-selected="false"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.6 1.1 5.3 3 1.7-1.9 3.2-3 5.3-3 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z" fill="#F0396B"/></svg>Favorites</button>
+      </div>
+    </div>
+    <ul class="mc-list" id="mcList"></ul>
+    <p class="mc-list-empty" id="mcListEmpty" hidden></p>
+  </aside>
+
+  <div class="mc-main">
+    <header class="mc-head">
+      <button type="button" class="mc-round mc-back" id="mcBack" aria-label="Back to all chats"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <span class="mc-head-av"><img id="mmcAv" alt=""/><i class="mc-head-dot" id="mcHeadDot"></i></span>
+      <div class="mc-head-who">
+        <h2><span id="mmcName"></span><svg class="mc-verified" viewBox="0 0 24 24" width="26" height="26" role="img" aria-label="Checked by SEMA BAY"><title>Checked by SEMA BAY</title><path d="M12 2l2.4 2.1 3.2-.3.9 3.1 2.8 1.6-1 3 1 3-2.8 1.6-.9 3.1-3.2-.3L12 22l-2.4-2.1-3.2.3-.9-3.1-2.8-1.6 1-3-1-3 2.8-1.6.9-3.1 3.2.3z" fill="#F5B400"/><path d="M8 12.3l2.7 2.7L16.3 9" fill="none" stroke="#0B1F4D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></h2>
+        <p id="mmcState"></p>
+      </div>
+      <div class="mc-hearts" aria-hidden="true">
+        <svg viewBox="0 0 200 120" width="190" height="114"><defs><radialGradient id="mcH" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#FF8A8A"/><stop offset=".45" stop-color="#F0182D"/><stop offset="1" stop-color="#A3001A"/></radialGradient></defs>
+          <path d="M100 104S52 76 46 46c-4-20 9-34 26-34 12 0 21 7 28 18 7-11 16-18 28-18 17 0 30 14 26 34-6 30-54 58-54 58z" fill="url(#mcH)"/>
+          <path d="M66 30c6-6 14-7 20-3" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+          <path d="M22 30s-9-5-10-11c-1-4 2-7 5-7 2 0 4 1 5 3 1-2 3-3 5-3 3 0 6 3 5 7-1 6-10 11-10 11z" fill="#FF3B6B"/>
+          <path d="M178 64s-9-5-10-11c-1-4 2-7 5-7 2 0 4 1 5 3 1-2 3-3 5-3 3 0 6 3 5 7-1 6-10 11-10 11z" fill="#FF2D55"/>
+          <path d="M160 18s-6-3-7-7c0-3 1-5 3-5 2 0 3 1 4 2 1-1 2-2 4-2 2 0 3 2 3 5-1 4-7 7-7 7z" fill="#FF6B8B"/>
+          <path d="M36 92s-6-3-7-7c0-3 1-5 3-5 2 0 3 1 4 2 1-1 2-2 4-2 2 0 3 2 3 5-1 4-7 7-7 7z" fill="#FF6B8B"/></svg>
+      </div>
+      <div class="mc-head-tools">
+        <button type="button" class="mc-round" id="mmcMenuBtn" aria-label="More options" aria-haspopup="menu" aria-expanded="false" aria-controls="mmcMenu"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><circle cx="5.5" cy="12" r="2.2" fill="currentColor"/><circle cx="12" cy="12" r="2.2" fill="currentColor"/><circle cx="18.5" cy="12" r="2.2" fill="currentColor"/></svg></button>
+        <button type="button" class="mc-round mc-min" id="mmcMin" aria-label="Minimise chat" aria-expanded="true"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M6 12h12" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></button>
+        <button type="button" class="mc-round mc-close" id="mmcClose" aria-label="Close chat"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></button>
+      </div>
+      <div class="mc-menu" id="mmcMenu" role="menu" hidden>
+        <button type="button" role="menuitem" data-mmc="fav"></button>
+        <button type="button" role="menuitem" data-mmc="profile">View profile</button>
+        <button type="button" role="menuitem" data-mmc="report">Report</button>
+        <button type="button" role="menuitem" data-mmc="block"></button>
+      </div>
+    </header>
+
+    <div class="mc-body" id="mmcBody" aria-live="polite"></div>
+
+    <div class="mc-pop mc-quick" id="mcQuick" role="menu" aria-label="Quick messages" hidden></div>
+    <div class="mc-pop mc-emoji" id="mcEmoji" role="dialog" aria-label="Emoji" hidden></div>
+
+    <form class="mc-form" id="mmcForm">
+      <button type="button" class="mc-tool mc-tool-plus" id="mcPlus" aria-label="Quick messages" aria-expanded="false" aria-controls="mcQuick" title="Quick messages"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg></button>
+      <label class="mc-tool mc-tool-img" title="Send a photo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="3" fill="#1E6FF2"/><circle cx="8.5" cy="9.5" r="2" fill="#fff"/><path d="M5 18l5-5 3 3 2.5-2.5L20 18z" fill="#fff"/></svg><span class="visually-hidden">Send a photo</span><input type="file" accept="image/*" id="mcFile" class="visually-hidden"/></label>
+      <button type="button" class="mc-tool mc-tool-emo" id="mcEmo" aria-label="Emoji" aria-expanded="false" aria-controls="mcEmoji" title="Emoji"><span aria-hidden="true">😊</span></button>
+      <label class="visually-hidden" for="mmcInput">Message</label>
+      <textarea id="mmcInput" rows="1" maxlength="1000" placeholder="Type a message…"></textarea>
+      <button type="submit" class="mc-send" aria-label="Send"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M3.5 11.2L20 4.2c.8-.3 1.5.4 1.2 1.2l-7 16.5c-.3.8-1.5.8-1.8-.1l-2-6.3-6.3-2c-.9-.3-.9-1.5-.1-1.8z" fill="currentColor"/></svg></button>
+    </form>
+  </div>
+</section>
+<button type="button" class="mc-launch" id="mcLaunch" hidden><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 4C7 4 3.5 7.2 3.5 11.2c0 2 .9 3.8 2.4 5.1L5 20l4.1-1.8c.9.3 1.9.4 2.9.4 5 0 8.5-3.2 8.5-7.2S17 4 12 4z" fill="currentColor"/></svg>Chats<b id="mcLaunchN" hidden></b></button>
+
+<div id="sbSiteFoot"></div>
+<script src="assets/js/sb-site.js?v=1438"></script>
+<script src="assets/js/sb-store.js?v=1438"></script>
+<script src="assets/js/sb-auth.js?v=1438"></script>
+<script src="assets/js/marriage.js?v=1438"></script>
+</body>
+</html>

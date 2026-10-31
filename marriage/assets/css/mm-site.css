@@ -1,0 +1,7 @@
+/* SEMA BAY Marriage — V69: the page uses the SEMA BAY header, menu and footer (sb-site);
+   the "Find Your Spouse" bar runs the full width of the screen, under the menu. */
+.mm{--mmx:clamp(16px,4vw,56px);padding:0 var(--mmx) 56px!important}
+.mm>.mm-bar{margin:0 calc(var(--mmx) * -1) 22px!important;border-radius:0!important;
+  padding-left:max(var(--mmx),calc((100vw - 1320px)/2))!important;padding-right:max(var(--mmx),calc((100vw - 1320px)/2))!important}
+@media (max-width:760px){.mm{--mmx:14px}.mm>.mm-bar{margin-bottom:16px!important}}
+body.mm-page{overflow-x:hidden}
